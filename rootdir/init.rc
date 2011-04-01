@@ -203,7 +203,14 @@ on post-fs
    # allow system to modify sysfs vvdhavs control file
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels_havs
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels_havs
-    chmod 0744 /system/etc/vdd_profiles
+    chmod 0744 /system/etc/vdd_profiles/800SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/825SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/850SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/875SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/900SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/925SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/950SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/975SZ.sh
 
 on boot
 # basic network init
