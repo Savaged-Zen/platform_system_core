@@ -224,6 +224,22 @@ on post-fs
     chmod 0744 /system/etc/vdd_profiles/950SZ.sh
     chown root system /system/etc/vdd_profiles/975SZ.sh
     chmod 0744 /system/etc/vdd_profiles/975SZ.sh
+    chown root system /system/etc/vdd_profiles/800SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/800SVS.sh
+    chown root system /system/etc/vdd_profiles/825SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/825SVS.sh
+    chown root system /system/etc/vdd_profiles/850SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/850SVS.sh
+    chown root system /system/etc/vdd_profiles/875SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/875SVS.sh
+    chown root system /system/etc/vdd_profiles/900SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/900SVS.sh
+    chown root system /system/etc/vdd_profiles/925SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/925SVS.sh
+    chown root system /system/etc/vdd_profiles/950SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/950SVS.sh
+    chown root system /system/etc/vdd_profiles/975SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/975SVS.sh
     mount yaffs2 mtd@system /system ro remount
 
 on boot
