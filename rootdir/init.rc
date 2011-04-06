@@ -200,6 +200,10 @@ on post-fs
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
+   # allow system to modify sysfs sbc control file
+   chown root system /sys/kernel/batt_options/sbc/sysctl_batt_sbc
+   chmod 0664 /sys/kernel/batt_options/sbc/sysctl_batt_sbc
+
    # allow system to modify sysfs vvdhavs control file
     mount yaffs2 mtd@system /system rw remount
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels_havs
