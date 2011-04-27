@@ -203,6 +203,48 @@ on post-fs
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+   
+   # allow system to modify sysfs sbc control file
+   chown root system /sys/kernel/batt_options/sbc/sysctl_batt_sbc
+   chmod 0664 /sys/kernel/batt_options/sbc/sysctl_batt_sbc
+
+   # allow system to modify sysfs vvdhavs control file
+    mount yaffs2 mtd@system /system rw remount
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels_havs
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels_havs
+    chown root system /system/etc/vdd_profiles/800SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/800SZ.sh
+    chown root system /system/etc/vdd_profiles/825SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/825SZ.sh
+    chown root system /system/etc/vdd_profiles/850SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/850SZ.sh
+    chown root system /system/etc/vdd_profiles/875SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/875SZ.sh
+    chown root system /system/etc/vdd_profiles/900SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/900SZ.sh
+    chown root system /system/etc/vdd_profiles/925SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/925SZ.sh
+    chown root system /system/etc/vdd_profiles/950SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/950SZ.sh
+    chown root system /system/etc/vdd_profiles/975SZ.sh
+    chmod 0744 /system/etc/vdd_profiles/975SZ.sh
+    chown root system /system/etc/vdd_profiles/800SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/800SVS.sh
+    chown root system /system/etc/vdd_profiles/825SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/825SVS.sh
+    chown root system /system/etc/vdd_profiles/850SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/850SVS.sh
+    chown root system /system/etc/vdd_profiles/875SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/875SVS.sh
+    chown root system /system/etc/vdd_profiles/900SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/900SVS.sh
+    chown root system /system/etc/vdd_profiles/925SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/925SVS.sh
+    chown root system /system/etc/vdd_profiles/950SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/950SVS.sh
+    chown root system /system/etc/vdd_profiles/975SVS.sh
+    chmod 0744 /system/etc/vdd_profiles/975SVS.sh
+    mount yaffs2 mtd@system /system ro remount
 
 on boot
 # basic network init
