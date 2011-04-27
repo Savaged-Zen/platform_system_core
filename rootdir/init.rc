@@ -13,14 +13,14 @@ loglevel 3
     export ANDROID_BOOTLOGO 1
     export ANDROID_CACHE /cache
     export ANDROID_ROOT /system
-    export ANDROID_ASSETS /system/appdisableBlending
+    export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
     export DOWNLOAD_CACHE /cache/download
     export EXTERNAL_STORAGE /mnt/sdcard
-    export ASEC_MOUNTPOINT /mnt/asecdisableBlending
+    export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
     export SD_EXT_DIRECTORY /sd-ext
-    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/coredisableBlending-junit.jar
+    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/core-junit.jar
 
 # Backward compatibility
     symlink /system/etc /etc
@@ -109,6 +109,10 @@ on post-fs
     # We chown/chmod /data again so because mount is run as root + defaults
     chown system system /data
     chmod 0771 /data
+
+    # Mount compressed filesystems
+    mount squashfs loop@/system/lib/modules/modules.sqf /system/lib/modules ro
+    mount squashfs loop@/system/xbin/xbin.sqf /system/xbin ro
 
     # Create dump dir and collect dumps.
     # Do this before we mount cache so eventually we can use cache for
@@ -199,48 +203,6 @@ on post-fs
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
     chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-
-   # allow system to modify sysfs sbc control file
-   chown root system /sys/kernel/batt_options/sbc/sysctl_batt_sbc
-   chmod 0664 /sys/kernel/batt_options/sbc/sysctl_batt_sbc
-
-   # allow system to modify sysfs vvdhavs control file
-    mount yaffs2 mtd@system /system rw remount
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels_havs
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/vdd_levels_havs
-    chown root system /system/etc/vdd_profiles/800SZ.sh
-    chmod 0744 /system/etc/vdd_profiles/800SZ.sh
-    chown root system /system/etc/vdd_profiles/825SZ.sh
-    chmod 0744 /system/etc/vdd_profiles/825SZ.sh
-    chown root system /system/etc/vdd_profiles/850SZ.sh
-    chmod 0744 /system/etc/vdd_profiles/850SZ.sh
-    chown root system /system/etc/vdd_profiles/875SZ.sh
-    chmod 0744 /system/etc/vdd_profiles/875SZ.sh
-    chown root system /system/etc/vdd_profiles/900SZ.sh
-    chmod 0744 /system/etc/vdd_profiles/900SZ.sh
-    chown root system /system/etc/vdd_profiles/925SZ.sh
-    chmod 0744 /system/etc/vdd_profiles/925SZ.sh
-    chown root system /system/etc/vdd_profiles/950SZ.sh
-    chmod 0744 /system/etc/vdd_profiles/950SZ.sh
-    chown root system /system/etc/vdd_profiles/975SZ.sh
-    chmod 0744 /system/etc/vdd_profiles/975SZ.sh
-    chown root system /system/etc/vdd_profiles/800SVS.sh
-    chmod 0744 /system/etc/vdd_profiles/800SVS.sh
-    chown root system /system/etc/vdd_profiles/825SVS.sh
-    chmod 0744 /system/etc/vdd_profiles/825SVS.sh
-    chown root system /system/etc/vdd_profiles/850SVS.sh
-    chmod 0744 /system/etc/vdd_profiles/850SVS.sh
-    chown root system /system/etc/vdd_profiles/875SVS.sh
-    chmod 0744 /system/etc/vdd_profiles/875SVS.sh
-    chown root system /system/etc/vdd_profiles/900SVS.sh
-    chmod 0744 /system/etc/vdd_profiles/900SVS.sh
-    chown root system /system/etc/vdd_profiles/925SVS.sh
-    chmod 0744 /system/etc/vdd_profiles/925SVS.sh
-    chown root system /system/etc/vdd_profiles/950SVS.sh
-    chmod 0744 /system/etc/vdd_profiles/950SVS.sh
-    chown root system /system/etc/vdd_profiles/975SVS.sh
-    chmod 0744 /system/etc/vdd_profiles/975SVS.sh
-    mount yaffs2 mtd@system /system ro remount
 
 on boot
 # basic network init
@@ -338,6 +300,12 @@ on boot
     setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
     setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
     setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
+
+# Include extra init file
+    import /system/etc/init.local.rc
+
+# Run sysinit
+    exec /system/bin/sysinit
 
     class_start default
 
